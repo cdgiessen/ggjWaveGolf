@@ -11,6 +11,8 @@ public class MeshDeformer : MonoBehaviour
     public float width = 10; //size of grid
     public float height = 10;
 
+    public float UpdateRange = 2;
+
     private Mesh mesh;
 
     private float waveAmplitude = 1;
@@ -57,6 +59,10 @@ public class MeshDeformer : MonoBehaviour
         }*/
         
         if (oldPlayerPosition != player.position || shouldUpdate || true)
+        {
+            //UpdateMeshGeometry();
+        }
+        if ((player.position - transform.position).magnitude < UpdateRange)
         {
             UpdateMeshGeometry();
         }
@@ -127,7 +133,7 @@ public class MeshDeformer : MonoBehaviour
         {
             for (int j = 0; j < cols; j++)
             {
-                verts[counter] = new Vector3(i * width / rows - width/2, 0, j * height / cols - height/2);
+                verts[counter] = new Vector3(i * width / (rows - 1) - width/2, 0, j * height / (cols - 1) - height/2);
                 normals[counter] = Vector3.up;
                 uv[counter] = new Vector2(i / rows, j / cols);
                 counter++;
