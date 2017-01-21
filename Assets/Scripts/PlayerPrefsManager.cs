@@ -21,6 +21,7 @@ public class PlayerPrefsManager : MonoBehaviour {
 		} else {
 			Debug.LogError ("Master Volume out of range");
 		}
+		PlayerPrefs.Save ();
 	}
 
 	public static float GetMasterVolume () {
@@ -29,6 +30,7 @@ public class PlayerPrefsManager : MonoBehaviour {
 
 	public static void SetHighScore (int score) {
 		PlayerPrefs.SetInt (HIGH_SCORE, score);
+		PlayerPrefs.Save ();
 	}
 
 	public static int GetHighScore () {
@@ -43,6 +45,7 @@ public class PlayerPrefsManager : MonoBehaviour {
 		PlayerPrefs.SetString(RIGHT, right);
 		PlayerPrefs.SetString(HIT, hit);
 		PlayerPrefs.SetString(PAUSE, pause);
+		PlayerPrefs.Save ();
 	}
 
 	public static KeyCode GetKeybinding(string keybinding)
@@ -50,17 +53,17 @@ public class PlayerPrefsManager : MonoBehaviour {
 		switch (keybinding)
 		{
 		case "forward":
-			return (KeyCode)Enum.Parse (typeof(KeyCode), keybinding);
+			return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(FORWARD));
 		case "backward":
-			return (KeyCode)Enum.Parse (typeof(KeyCode), keybinding);
+			return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(BACKWARD));
 		case "rotateLeft":
-			return (KeyCode)Enum.Parse (typeof(KeyCode), keybinding);
+			return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(LEFT));
 		case "rotateRight":
-			return (KeyCode)Enum.Parse (typeof(KeyCode), keybinding);
+			return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(RIGHT));
 		case "hit":
-			return (KeyCode)Enum.Parse (typeof(KeyCode), keybinding);
+			return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(HIT));
 		case "pause":
-			return (KeyCode)Enum.Parse (typeof(KeyCode), keybinding);
+			return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(PAUSE));
 		default:
 			return KeyCode.None;
 		}
