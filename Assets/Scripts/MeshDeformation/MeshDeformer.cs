@@ -11,24 +11,24 @@ public class MeshDeformer : MonoBehaviour
     public float width = 10; //size of grid
     public float height = 10;
 
-    public float UpdateRange = 2;
+    public float UpdateRange = 2; //how close the player needs to be for this mesh to update itself
 
     private Mesh mesh;
 
     private float waveAmplitude = 1;
     private float waveDissapationRate;
-    private float timeSinceStart = 0;
+    
     public float angularFreq = Mathf.PI * 2 * 10;
     public float steepness = 1;
     public float MaxHeight = 2;
     public float midValue = 1f;
-    private Vector3[] vertsToDeform;
-    private Vector3[] normalsToDeform;
-
-    private Vector3 oldPlayerPosition;
 
     public Transform player;
     private bool shouldUpdate;
+
+    private bool ringWave = false;
+    private Vector3 ringCenter;
+    private float ringTimer;
 
     // Use this for initialization
     void Start()
@@ -57,35 +57,28 @@ public class MeshDeformer : MonoBehaviour
                 // Do something with the object that was hit by the raycast.
             }
         }*/
-        
-        if (oldPlayerPosition != player.position || shouldUpdate || true)
-        {
-            //UpdateMeshGeometry();
-        }
-        if ((player.position - transform.position).magnitude < UpdateRange)
+
+        if ((player.position - (transform.position + transform.parent.position)).magnitude < UpdateRange)
         {
             UpdateMeshGeometry();
         }
-        oldPlayerPosition = player.position;
-        timeSinceStart += Time.deltaTime;
+        
     }
 
     public void UpdateMeshGeometry()
     {
-        vertsToDeform = mesh.vertices;
-        normalsToDeform = mesh.normals;
+        Vector3[] vertsToDeform = mesh.vertices; 
+        Vector3[] normalsToDeform = mesh.normals; 
         int counter = 0;
-        for (int i = 0; i < rows; i++)
-        {
-            for (int j = 0; j < cols; j++)
-            {
-                Vector3 vertPos = new Vector3(vertsToDeform[counter].x, 0 , vertsToDeform[counter].z);
-                float distance = Mathf.Abs(((vertPos + transform.position) - player.position).magnitude);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                Vector3 vertPos = new Vector3(vertsToDeform[counter].x, 0 , vertsToDeform[counter].z) ;
+                float distance = ((vertPos + transform.position + transform.parent.position) - player.position).magnitude;
                 //Vector3 finalPos = new Vector3(vertPos.x, Mathf.Sin(distance - timeSinceStart*angularFreq), vertPos.z);   
-                //float valGauss = Mathf.Pow(2.71828f, (-1 * Mathf.Pow(-vertPos.x + waveOrigin.x, 2) - 2 * (-vertPos.x + waveOrigin.x) * (-vertPos.z + waveOrigin.z) + 1* Mathf.Pow(-vertPos.z + waveOrigin.z, 2)));
                 float valLogistics = MaxHeight / (1 + Mathf.Pow(2.71828f, -steepness * (distance - midValue)));
                 Vector3 finalPos = new Vector3(vertPos.x, -valLogistics + MaxHeight, vertPos.z);
                 vertsToDeform[counter] = finalPos;
+
                 float xDiff = 0, zDiff = 0;
                 if(i == 0) {
                     xDiff = (vertsToDeform[(cols * i + j)].y - vertsToDeform[(cols * (i + 1) + j)].y);
@@ -108,7 +101,6 @@ public class MeshDeformer : MonoBehaviour
         mesh.vertices = vertsToDeform;
         mesh.normals = normalsToDeform;
     }
-
 
     public void ShouldUpdate()
     {
@@ -134,7 +126,7 @@ public class MeshDeformer : MonoBehaviour
             {
                 verts[counter] = new Vector3(i * width / (rows - 1) - width/2, 0, j * height / (cols - 1) - height/2);
                 normals[counter] = Vector3.up;
-                uv[counter] = new Vector2(i / rows, j / cols);
+                uv[counter] = new Vector2(i * width / (rows - 1), j * height / (cols - 1));
                 counter++;
             }
         }
