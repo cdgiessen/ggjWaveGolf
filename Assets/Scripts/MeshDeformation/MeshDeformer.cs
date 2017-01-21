@@ -87,6 +87,8 @@ public class MeshDeformer : MonoBehaviour
                 Vector3 finalPos = new Vector3(vertPos.x, -valLogistics + MaxHeight, vertPos.z);
                 vertsToDeform[counter] = finalPos;
 
+<<<<<<< HEAD
+=======
                 float xDiff = 0, zDiff = 0;
                 if(i == 0) {
                     xDiff = (vertsToDeform[(cols * i + j)].y - vertsToDeform[(cols * (i + 1) + j)].y);
@@ -103,6 +105,7 @@ public class MeshDeformer : MonoBehaviour
                     zDiff = (vertsToDeform[(cols * i + j - 1)].y - vertsToDeform[(cols * i + j + 1)].y);
                 }
                 normalsToDeform[counter] = new Vector3(xDiff, 1, zDiff).normalized;
+>>>>>>> origin/master
                 counter++;
             }
         }
