@@ -11,6 +11,8 @@ public class MeshDeformer : MonoBehaviour
     public float width = 10; //size of grid
     public float height = 10;
 
+    public float UpdateRange = 2;
+
     private Mesh mesh;
 
     private float waveAmplitude = 1;
@@ -56,7 +58,11 @@ public class MeshDeformer : MonoBehaviour
             }
         }*/
         
-        if (oldPlayerPosition != player.position || shouldUpdate)
+        if (oldPlayerPosition != player.position || shouldUpdate || true)
+        {
+            //UpdateMeshGeometry();
+        }
+        if ((player.position - transform.position).magnitude < UpdateRange)
         {
             UpdateMeshGeometry();
         }
@@ -73,7 +79,7 @@ public class MeshDeformer : MonoBehaviour
         {
             for (int j = 0; j < cols; j++)
             {
-                Vector3 vertPos = vertsToDeform[counter];
+                Vector3 vertPos = new Vector3(vertsToDeform[counter].x, 0 , vertsToDeform[counter].z);
                 float distance = Mathf.Abs(((vertPos + transform.position) - player.position).magnitude);
                 //Vector3 finalPos = new Vector3(vertPos.x, Mathf.Sin(distance - timeSinceStart*angularFreq), vertPos.z);   
                 //float valGauss = Mathf.Pow(2.71828f, (-1 * Mathf.Pow(-vertPos.x + waveOrigin.x, 2) - 2 * (-vertPos.x + waveOrigin.x) * (-vertPos.z + waveOrigin.z) + 1* Mathf.Pow(-vertPos.z + waveOrigin.z, 2)));
@@ -81,10 +87,30 @@ public class MeshDeformer : MonoBehaviour
                 Vector3 finalPos = new Vector3(vertPos.x, -valLogistics + MaxHeight, vertPos.z);
                 vertsToDeform[counter] = finalPos;
 
+<<<<<<< HEAD
+=======
+                float xDiff = 0, zDiff = 0;
+                if(i == 0) {
+                    xDiff = (vertsToDeform[(cols * i + j)].y - vertsToDeform[(cols * (i + 1) + j)].y);
+                } else if (i == rows - 1){
+                    xDiff = (vertsToDeform[(cols * (i - 1) + j)].y - vertsToDeform[(cols * i + j)].y);
+                } else {
+                    xDiff = (vertsToDeform[(cols * (i - 1) + j)].y - vertsToDeform[(cols * (i + 1) + j)].y);
+                }
+                if (j == 0) {
+                    zDiff = (vertsToDeform[(cols * i + j)].y - vertsToDeform[(cols * i + j + 1)].y);
+                } else if (j == cols - 1) {
+                    zDiff = (vertsToDeform[(cols * i + j - 1)].y - vertsToDeform[(cols * i + j)].y);
+                } else {
+                    zDiff = (vertsToDeform[(cols * i + j - 1)].y - vertsToDeform[(cols * i + j + 1)].y);
+                }
+                normalsToDeform[counter] = new Vector3(xDiff, 1, zDiff).normalized;
+>>>>>>> origin/master
                 counter++;
             }
         }
         mesh.vertices = vertsToDeform;
+        mesh.normals = normalsToDeform;
     }
 
 
@@ -110,7 +136,7 @@ public class MeshDeformer : MonoBehaviour
         {
             for (int j = 0; j < cols; j++)
             {
-                verts[counter] = new Vector3(i * width / rows - width/2, 0, j * height / cols - height/2);
+                verts[counter] = new Vector3(i * width / (rows - 1) - width/2, 0, j * height / (cols - 1) - height/2);
                 normals[counter] = Vector3.up;
                 uv[counter] = new Vector2(i / rows, j / cols);
                 counter++;
