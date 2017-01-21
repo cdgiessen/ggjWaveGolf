@@ -6,27 +6,56 @@ public class PlayerController : MonoBehaviour {
 
     public float moveSpeed = 1f;
 	public float rotationSpeed = 1f;
-	public float strafeSpeed = 1f;
 	public Canvas pauseMenu;
+	KeyCode forward;
+	KeyCode backward;
+	KeyCode left;
+	KeyCode right;
+	KeyCode hit;
+	KeyCode pause;
 	bool isPaused = false;
 
 	// Use this for initialization
 	void Awake () {
-        gameObject.tag = "Player";
+		gameObject.tag = "Player";
+		forward = PlayerPrefsManager.GetKeyBinding ("forward");
+		backward = PlayerPrefsManager.GetKeyBinding ("backward");
+		left = PlayerPrefsManager.GetKeyBinding ("rotateLeft");
+		right = PlayerPrefsManager.GetKeyBinding ("rotateRight");
+		hit = PlayerPrefsManager.GetKeyBinding ("hit");
+		pause = PlayerPrefsManager.GetKeyBinding ("pause");
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown ("Pause")) {
+		if (Input.GetKeyDown(pause)) {
 			Time.timeScale = 0;
 			pauseMenu.gameObject.SetActive (true);
 			isPaused = true;
-			Debug.Log ("Paused Game");
 		}
-		float xAxis = Input.GetAxis("Horizontal") * strafeSpeed * Time.deltaTime;
-		float zAxis = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
-		float rotation = Input.GetAxis("Rotation") * rotationSpeed * Time.deltaTime;
-		transform.Translate (xAxis, 0, zAxis);
+
+		float zinput = 0;
+		float rotateInput = 0;
+
+		if (Input.GetKey (forward))
+		{
+			zinput = 1;
+		}
+		else if (Input.GetKey (backward))
+		{
+			zinput = -1;
+		}
+		if (Input.GetKey (left))
+		{
+			rotateInput = -1;
+		}
+		else if (Input.GetKey (right))
+		{
+			rotateInput = 1;
+		}
+		float zAxis = zinput * moveSpeed * Time.deltaTime;
+		float rotation = rotateInput * rotationSpeed * Time.deltaTime;
+		transform.Translate (0, 0, zAxis);
 		transform.Rotate (0, rotation, 0);
     }
 
