@@ -22,12 +22,12 @@ public class OptionsController : MonoBehaviour
 	void Start ()
 	{
 		volumeSlider.value = PlayerPrefsManager.GetMasterVolume ();
-		forwardField.text = PlayerPrefsManager.GetKeyBinding ("forward").ToString();
-		backwardField.text = PlayerPrefsManager.GetKeyBinding ("backward").ToString();
-		leftField.text = PlayerPrefsManager.GetKeyBinding ("rotateLeft").ToString();
-		rightField.text = PlayerPrefsManager.GetKeyBinding ("rotateRight").ToString();
-		hitField.text = PlayerPrefsManager.GetKeyBinding ("hit").ToString();
-		pauseField.text = PlayerPrefsManager.GetKeyBinding ("pause").ToString();
+		forwardField.text = PlayerPrefsManager.GetKeybinding ("forward").ToString();
+		backwardField.text = PlayerPrefsManager.GetKeybinding ("backward").ToString();
+		leftField.text = PlayerPrefsManager.GetKeybinding ("rotateLeft").ToString();
+		rightField.text = PlayerPrefsManager.GetKeybinding ("rotateRight").ToString();
+		hitField.text = PlayerPrefsManager.GetKeybinding ("hit").ToString();
+		pauseField.text = PlayerPrefsManager.GetKeybinding ("pause").ToString();
 	}
 
 	// Update is called once per frame
@@ -52,6 +52,7 @@ public class OptionsController : MonoBehaviour
 	{
 		PlayerPrefsManager.SetMasterVolume (volumeSlider.value);
 		PlayerPrefsManager.SetKeybindings (forwardField.text, backwardField.text, leftField.text, rightField.text, hitField.text, pauseField.text);
+		PlayerPrefs.Save ();
 	}
 
 	public void KeybindingSetting (Text sendingField)
