@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
 	void Awake () {
         gameObject.tag = "Player";
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
         float xAxis = Input.GetAxis("Horizontal");
