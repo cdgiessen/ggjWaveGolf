@@ -11,7 +11,6 @@ public class MeshDeformer : MonoBehaviour
     public float height = 10;
 
     private Mesh mesh;
-
     public float hitRadius = 0.5f;
 
     public Vector3 waveOrigin = new Vector3(0.5f, 0, 0.5f);
@@ -64,8 +63,10 @@ public class MeshDeformer : MonoBehaviour
                 {
                     Vector3 vertPos = vertsToDeform[counter];
                     float distance = Mathf.Abs((vertPos - waveOrigin).magnitude);
-                    //Vector3 finalPos = new Vector3(vertPos.x, Mathf.Sin(distance - timeSinceStart*angularFreq), vertPos.z);
-                    Vector3 finalPos = new Vector3(vertPos.x, -MaxHeight / (1 + Mathf.Pow(2.71828f, -steepness * (distance - midValue))), vertPos.z);
+                    //Vector3 finalPos = new Vector3(vertPos.x, Mathf.Sin(distance - timeSinceStart*angularFreq), vertPos.z);   
+                    //float valGauss = Mathf.Pow(2.71828f, (-1 * Mathf.Pow(-vertPos.x + waveOrigin.x, 2) - 2 * (-vertPos.x + waveOrigin.x) * (-vertPos.z + waveOrigin.z) + 1* Mathf.Pow(-vertPos.z + waveOrigin.z, 2)));
+                    float valLogistics = -MaxHeight / (1 + Mathf.Pow(2.71828f, -steepness * (distance - midValue)));
+                    Vector3 finalPos = new Vector3(vertPos.x, valLogistics, vertPos.z);
 
                     vertsToDeform[counter] = finalPos;
                     counter++;
