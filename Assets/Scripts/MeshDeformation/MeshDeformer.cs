@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshFilter))]
 public class MeshDeformer : MonoBehaviour
 {
     public int rows = 1; //squares in the grid, not vertices
     public int cols = 1;
 
-    public float width = 10;
+    public float width = 10; //size of grid
     public float height = 10;
 
     private Mesh mesh;
-    public float hitRadius = 0.5f;
 
-    public Vector3 waveOrigin = new Vector3(0.5f, 0, 0.5f);
     private float waveAmplitude = 1;
     private float waveDissapationRate;
     private float timeSinceStart = 0;
@@ -21,20 +20,29 @@ public class MeshDeformer : MonoBehaviour
     public float steepness = 1;
     public float MaxHeight = 2;
     public float midValue = 1f;
-    Vector3[] vertsToDeform;
+    private Vector3[] vertsToDeform;
+    private Vector3[] normalsToDeform;
 
-    private Vector3 oldWavePosition;
+    private Vector3 oldPlayerPosition;
+
+    public Transform player;
+    private bool shouldUpdate;
 
     // Use this for initialization
     void Start()
     {
-        GetComponent<MeshFilter>().mesh = CreateMesh(rows, cols);
+        //if(GetComponent<MeshFilter>().mesh == null)
+            GetComponent<MeshFilter>().mesh = CreateMesh(rows, cols);
+        
         mesh = GetComponent<MeshFilter>().mesh;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        UpdateMeshGeometry();
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetMouseButton(0))
         {
             RaycastHit hit;
@@ -42,40 +50,54 @@ public class MeshDeformer : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                waveOrigin = hit.point;
+                player.position = hit.point;
 
                 // Do something with the object that was hit by the raycast.
             }
-        }
-        float xAxis = Input.GetAxis("Horizontal");
-        float zAxis = Input.GetAxis("Vertical");
-
-        waveOrigin.x += xAxis*Time.deltaTime;
-        waveOrigin.z += zAxis * Time.deltaTime;
-
-        if (oldWavePosition != waveOrigin)
+        }*/
+        
+        if (oldPlayerPosition != player.position || shouldUpdate)
         {
-            vertsToDeform = mesh.vertices;
-            int counter = 0;
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    Vector3 vertPos = vertsToDeform[counter];
-                    float distance = Mathf.Abs((vertPos - waveOrigin).magnitude);
-                    //Vector3 finalPos = new Vector3(vertPos.x, Mathf.Sin(distance - timeSinceStart*angularFreq), vertPos.z);   
-                    //float valGauss = Mathf.Pow(2.71828f, (-1 * Mathf.Pow(-vertPos.x + waveOrigin.x, 2) - 2 * (-vertPos.x + waveOrigin.x) * (-vertPos.z + waveOrigin.z) + 1* Mathf.Pow(-vertPos.z + waveOrigin.z, 2)));
-                    float valLogistics = -MaxHeight / (1 + Mathf.Pow(2.71828f, -steepness * (distance - midValue)));
-                    Vector3 finalPos = new Vector3(vertPos.x, valLogistics, vertPos.z);
-
-                    vertsToDeform[counter] = finalPos;
-                    counter++;
-                }
-            }
-            mesh.vertices = vertsToDeform;
+            UpdateMeshGeometry();
         }
-        oldWavePosition = waveOrigin;
+        oldPlayerPosition = player.position;
         timeSinceStart += Time.deltaTime;
+    }
+
+    public void UpdateMeshGeometry()
+    {
+        vertsToDeform = mesh.vertices;
+        normalsToDeform = mesh.normals;
+        int counter = 0;
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                Vector3 vertPos = vertsToDeform[counter];
+                float distance = Mathf.Abs(((vertPos + transform.position) - player.position).magnitude);
+                //Vector3 finalPos = new Vector3(vertPos.x, Mathf.Sin(distance - timeSinceStart*angularFreq), vertPos.z);   
+                //float valGauss = Mathf.Pow(2.71828f, (-1 * Mathf.Pow(-vertPos.x + waveOrigin.x, 2) - 2 * (-vertPos.x + waveOrigin.x) * (-vertPos.z + waveOrigin.z) + 1* Mathf.Pow(-vertPos.z + waveOrigin.z, 2)));
+                float valLogistics = MaxHeight / (1 + Mathf.Pow(2.71828f, -steepness * (distance - midValue)));
+                Vector3 finalPos = new Vector3(vertPos.x, -valLogistics + MaxHeight, vertPos.z);
+                vertsToDeform[counter] = finalPos;
+
+                if()
+
+                counter++;
+            }
+        }
+        mesh.vertices = vertsToDeform;
+    }
+
+
+    public void ShouldUpdate()
+    {
+        shouldUpdate = true;
+    }
+
+    public void ShouldNotUpdate()
+    {
+        shouldUpdate = false;
     }
 
     public Mesh CreateMesh(int rows, int cols)
@@ -90,7 +112,7 @@ public class MeshDeformer : MonoBehaviour
         {
             for (int j = 0; j < cols; j++)
             {
-                verts[counter] = new Vector3(i * width / rows, 0, j * height / cols);
+                verts[counter] = new Vector3(i * width / rows - width/2, 0, j * height / cols - height/2);
                 normals[counter] = Vector3.up;
                 uv[counter] = new Vector2(i / rows, j / cols);
                 counter++;
@@ -112,6 +134,7 @@ public class MeshDeformer : MonoBehaviour
         }
 
         Mesh mesh = new Mesh();
+        mesh.name = "Ground Mesh";
         mesh.vertices = verts;
         mesh.triangles = indicies;
         mesh.normals = normals;
