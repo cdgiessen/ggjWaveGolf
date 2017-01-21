@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public float MoveSpeed = 1;
+    public float moveSpeed = 1f;
+	public float rotationSpeed = 1f;
+	public float strafeSpeed = 1f;
 
 	// Use this for initialization
 	void Awake () {
@@ -13,10 +15,11 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float xAxis = Input.GetAxis("Horizontal");
-        float zAxis = Input.GetAxis("Vertical");
-        Vector3 newPos = new Vector3(xAxis, 0, zAxis)*Time.deltaTime*MoveSpeed + transform.position;
-        transform.position = newPos;
+		float xAxis = Input.GetAxis("Horizontal") * strafeSpeed * Time.deltaTime;
+		float zAxis = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+		float rotation = Input.GetAxis("Rotation") * rotationSpeed * Time.deltaTime;
+		transform.Translate (xAxis, 0, zAxis);
+		transform.Rotate (0, rotation, 0);
 
     }
 }

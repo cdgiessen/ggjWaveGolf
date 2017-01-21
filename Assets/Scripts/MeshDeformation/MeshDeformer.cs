@@ -81,8 +81,6 @@ public class MeshDeformer : MonoBehaviour
                 Vector3 finalPos = new Vector3(vertPos.x, -valLogistics + MaxHeight, vertPos.z);
                 vertsToDeform[counter] = finalPos;
 
-                if()
-
                 counter++;
             }
         }
