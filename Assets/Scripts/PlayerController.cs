@@ -18,12 +18,12 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		gameObject.tag = "Player";
-		forward = PlayerPrefsManager.GetKeyBinding ("forward");
-		backward = PlayerPrefsManager.GetKeyBinding ("backward");
-		left = PlayerPrefsManager.GetKeyBinding ("rotateLeft");
-		right = PlayerPrefsManager.GetKeyBinding ("rotateRight");
-		hit = PlayerPrefsManager.GetKeyBinding ("hit");
-		pause = PlayerPrefsManager.GetKeyBinding ("pause");
+		forward = PlayerPrefsManager.GetKeybinding ("forward");
+		backward = PlayerPrefsManager.GetKeybinding ("backward");
+		left = PlayerPrefsManager.GetKeybinding ("rotateLeft");
+		right = PlayerPrefsManager.GetKeybinding ("rotateRight");
+		hit = PlayerPrefsManager.GetKeybinding ("hit");
+		pause = PlayerPrefsManager.GetKeybinding ("pause");
 	}
 
 	// Update is called once per frame

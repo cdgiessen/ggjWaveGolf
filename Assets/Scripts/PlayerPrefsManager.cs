@@ -35,7 +35,7 @@ public class PlayerPrefsManager : MonoBehaviour {
 		return PlayerPrefs.GetInt (HIGH_SCORE);
 	}
 
-	public void SetKeybindings(string forward, string backward, string left, string right, string hit, string pause)
+	public static void SetKeybindings(string forward, string backward, string left, string right, string hit, string pause)
 	{
 		PlayerPrefs.SetString(FORWARD, forward);
 		PlayerPrefs.SetString(BACKWARD, backward);
@@ -45,7 +45,7 @@ public class PlayerPrefsManager : MonoBehaviour {
 		PlayerPrefs.SetString(PAUSE, pause);
 	}
 
-	public KeyCode GetKeybinding(string keybinding)
+	public static KeyCode GetKeybinding(string keybinding)
 	{
 		switch (keybinding)
 		{
