@@ -1124,7 +1124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 739363790}
-  changeDelay: 0.1
+  changeDelay: 0.3
 --- !u!114 &747874229 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114557653049365658, guid: 7fae623d67dbbdc4c9e51791f6608a8b,
