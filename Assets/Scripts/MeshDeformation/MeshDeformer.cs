@@ -63,7 +63,7 @@ public class MeshDeformer : MonoBehaviour
 
         if ((player.position - (transform.position + transform.parent.position)).magnitude < UpdateRange)
         {
-            DeformMeshGeometry();
+           DeformMeshGeometry();
         }
         
     }
