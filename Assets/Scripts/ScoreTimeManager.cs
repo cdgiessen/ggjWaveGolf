@@ -23,14 +23,14 @@ public class ScoreTimeManager : MonoBehaviour {
 		timeLeft -= Time.deltaTime;
 		scoreText.text = score.ToString ();
 		countdownText.text = timeLeft.ToString ("F");
-		if (timeLeft <= 0.3)
+		if (timeLeft <= 0)
 		{
-			if (PlayerPrefs.GetFloat ("High Score") < score)
+			if (PlayerPrefs.GetInt ("High Score") < score)
 			{
-				PlayerPrefs.SetFloat ("High Score", score);
+				PlayerPrefs.SetInt ("High Score", score);
 			}
 			PlayerPrefs.Save ();
-			UnityEngine.SceneManagement.SceneManager.LoadScene (0);
+			UnityEngine.SceneManagement.SceneManager.LoadScene (1);
 		}
 	}
 }
