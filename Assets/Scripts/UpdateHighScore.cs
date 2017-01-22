@@ -9,7 +9,7 @@ public class UpdateHighScore : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if (PlayerPrefs.HasKey ("High Score")) {
-			scoreText.text = PlayerPrefs.GetInt ("High Score").ToString();
+			scoreText.text = PlayerPrefsManager.GetHighScore();
 		}
 		else
 		{
@@ -20,6 +20,6 @@ public class UpdateHighScore : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		scoreText.text = PlayerPrefs.GetInt ("High Score").ToString();
+		scoreText.text = PlayerPrefsManager.GetHighScore();
 	}
 }
