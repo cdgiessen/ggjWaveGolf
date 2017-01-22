@@ -7,8 +7,10 @@ public class ScoreTimeManager : MonoBehaviour {
 
 	public Text scoreText;
 	public Text countdownText;
+	public AudioSource audio;
 	public float startTime = 60f;
 	float timeLeft;
+	bool clappingStarted;
 	public int score = 0;
 
 	// Use this for initialization
@@ -27,8 +29,13 @@ public class ScoreTimeManager : MonoBehaviour {
 		{
 			if (PlayerPrefsManager.GetHighScore() < score)
 			{
-				PlayerPrefs.SetInt ("High Score", score);
+				PlayerPrefsManager.SetHighScore (score);
 			}
+			audio.Play ();
+			clappingStarted = true;
+		}
+		if (!audio.isPlaying && clappingStarted)
+		{
 			UnityEngine.SceneManagement.SceneManager.LoadScene (1);
 		}
 	}
