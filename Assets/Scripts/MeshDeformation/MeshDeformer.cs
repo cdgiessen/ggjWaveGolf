@@ -75,7 +75,7 @@ public class MeshDeformer : MonoBehaviour
         int counter = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                Vector3 vertPos = new Vector3(vertsToDeform[counter].x, 0 , vertsToDeform[counter].z) ;
+                Vector3 vertPos = new Vector3(vertsToDeform[counter].x, transform.parent.position.y, vertsToDeform[counter].z) ;
                 float distance = ((vertPos + transform.position + transform.parent.position) - player.position).magnitude;
                 //Vector3 finalPos = new Vector3(vertPos.x, Mathf.Sin(distance - timeSinceStart*angularFreq), vertPos.z);   
                 float valLogistics = MaxHeight / (1 + Mathf.Pow(2.71828f, -steepness * (distance - midValue)));
