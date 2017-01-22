@@ -24,7 +24,7 @@ public class MeshDeformer : MonoBehaviour
     public float midValue = 1f;
 
     public Transform player;
-	private bool shouldUpdate;
+    private bool shouldUpdate;
 
     private bool ringWave = false;
     private Vector3 ringCenter;
@@ -71,12 +71,12 @@ public class MeshDeformer : MonoBehaviour
     public void DeformMeshGeometry()
     {
         Vector3[] vertsToDeform = mesh.vertices; 
-        Vector3[] normalsToDeform = mesh.normals;
+        Vector3[] normalsToDeform = mesh.normals; 
         int counter = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-				Vector3 vertPos = new Vector3(vertsToDeform[counter].x, 0, vertsToDeform[counter].z) ;
-				float distance = ((vertPos + transform.position + transform.parent.position) - player.position).magnitude;
+                Vector3 vertPos = new Vector3(vertsToDeform[counter].x, 0 , vertsToDeform[counter].z) ;
+                float distance = ((vertPos + transform.position + transform.parent.position) - player.position).magnitude;
                 //Vector3 finalPos = new Vector3(vertPos.x, Mathf.Sin(distance - timeSinceStart*angularFreq), vertPos.z);   
                 float valLogistics = MaxHeight / (1 + Mathf.Pow(2.71828f, -steepness * (distance - midValue)));
                 Vector3 finalPos = new Vector3(vertPos.x, -valLogistics + MaxHeight, vertPos.z);
