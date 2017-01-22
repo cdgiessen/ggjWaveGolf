@@ -32,9 +32,7 @@ public static class MeshSaverEditor
 
         path = FileUtil.GetProjectRelativePath(path);
 
-        Mesh meshToSave = (makeNewInstance) ? Object.Instantiate(mesh) as Mesh : mesh;
-
-        
+        Mesh meshToSave = (makeNewInstance) ? Object.Instantiate(mesh) as Mesh : mesh; 
 
         AssetDatabase.CreateAsset(meshToSave, path);
         AssetDatabase.SaveAssets();

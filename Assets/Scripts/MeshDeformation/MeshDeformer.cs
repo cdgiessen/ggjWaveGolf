@@ -33,8 +33,11 @@ public class MeshDeformer : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //if(GetComponent<MeshFilter>().mesh == null)
+        if (GetComponent<MeshFilter>().mesh == null)
+        {
+            Debug.Log("Created Mesh");
             GetComponent<MeshFilter>().mesh = CreateMesh(rows, cols);
+        }
         
         mesh = GetComponent<MeshFilter>().mesh;
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -101,6 +104,7 @@ public class MeshDeformer : MonoBehaviour
         mesh.vertices = vertsToDeform;
         mesh.normals = normalsToDeform;
     }
+
 
     public void ShouldUpdate()
     {
