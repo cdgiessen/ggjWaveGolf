@@ -3484,6 +3484,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114120821760378450, guid: dccaa8ea47be142478d73ca39a41717c,
+        type: 2}
+      propertyPath: steepness
+      value: 5.29
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dccaa8ea47be142478d73ca39a41717c, type: 2}
   m_IsPrefabParent: 0
