@@ -53,17 +53,65 @@ public class PlayerPrefsManager : MonoBehaviour {
 		switch (keybinding)
 		{
 		case "forward":
-			return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(FORWARD));
+			if (PlayerPrefs.HasKey (FORWARD))
+			{
+				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(FORWARD));
+			}
+			else
+			{
+				PlayerPrefs.SetString(FORWARD, KeyCode.W.ToString());
+				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(FORWARD));
+			}
 		case "backward":
-			return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(BACKWARD));
+			if (PlayerPrefs.HasKey (BACKWARD))
+			{
+				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(BACKWARD));
+			}
+			else
+			{
+				PlayerPrefs.SetString(BACKWARD, KeyCode.S.ToString());
+				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(BACKWARD));
+			}
 		case "rotateLeft":
-			return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(LEFT));
+			if (PlayerPrefs.HasKey (LEFT))
+			{
+				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(LEFT));
+			}
+			else
+			{
+				PlayerPrefs.SetString(LEFT, KeyCode.A.ToString());
+				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(LEFT));
+			}
 		case "rotateRight":
-			return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(RIGHT));
+			if (PlayerPrefs.HasKey (RIGHT))
+			{
+				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(RIGHT));
+			}
+			else
+			{
+				PlayerPrefs.SetString(RIGHT, KeyCode.D.ToString());
+				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(RIGHT));
+			}
 		case "hit":
-			return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(HIT));
+			if (PlayerPrefs.HasKey (HIT))
+			{
+				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(HIT));
+			}
+			else
+			{
+				PlayerPrefs.SetString(HIT, KeyCode.Space.ToString());
+				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(HIT));
+			}
 		case "pause":
-			return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(PAUSE));
+			if (PlayerPrefs.HasKey (PAUSE))
+			{
+				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(PAUSE));
+			}
+			else
+			{
+				PlayerPrefs.SetString(PAUSE, KeyCode.Escape.ToString());
+				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(PAUSE));
+			}
 		default:
 			return KeyCode.None;
 		}
