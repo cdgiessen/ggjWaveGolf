@@ -25,17 +25,10 @@ public class ScoreTimeManager : MonoBehaviour {
 		timeLeft -= Time.deltaTime;
 		scoreText.text = score.ToString ();
 		countdownText.text = timeLeft.ToString ("F");
-		if (timeLeft <= 0)
-		{
-			if (PlayerPrefsManager.GetHighScore() < score)
-			{
+		if (timeLeft <= 0) {
+			if (PlayerPrefsManager.GetHighScore () < score) {
 				PlayerPrefsManager.SetHighScore (score);
 			}
-			audio.Play ();
-			clappingStarted = true;
-		}
-		if (!audio.isPlaying && clappingStarted)
-		{
 			UnityEngine.SceneManagement.SceneManager.LoadScene (1);
 		}
 	}
