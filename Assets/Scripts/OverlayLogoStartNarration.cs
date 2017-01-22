@@ -24,11 +24,11 @@ public class OverlayLogoStartNarration : MonoBehaviour {
 		{
 			UnityEngine.SceneManagement.SceneManager.LoadScene (1);
 		}
-		if (PlayerPrefs.HasKey ("HIT"))
+		if (PlayerPrefs.HasKey ("HIT") && Input.anyKey)
 		{
 			audioSource.GetComponent<AudioSource> ().Stop ();
 		}
-		else
+		else if (Input.anyKeyDown)
 		{
 			if (Input.GetKey ((KeyCode)Enum.Parse(typeof (KeyCode), PlayerPrefs.GetString ("HIT"))))
 			{
