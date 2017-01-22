@@ -91,8 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69de2ebf715ea4445b42edf98ade5261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 11
-  cols: 11
+  rows: 12
+  cols: 12
   width: 2
   height: 2
   UpdateRange: 5
