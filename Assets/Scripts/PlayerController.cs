@@ -70,6 +70,11 @@ public class PlayerController : MonoBehaviour {
 		float zAxis = zinput * moveSpeed * Time.deltaTime;
 		float xAxis = xinput * strafeSpeed * Time.deltaTime;
 		float rotation = rotateInput * rotationSpeed * Time.deltaTime;
+
+        xAxis = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        zAxis = Input.GetAxis("Vertical") * strafeSpeed * Time.deltaTime;
+
+        rotation = xAxis * rotationSpeed;
 		transform.Translate (xAxis, 0, zAxis);
 		transform.Rotate (0, rotation, 0);
     }
