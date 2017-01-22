@@ -12,6 +12,8 @@ public class PlayerPrefsManager : MonoBehaviour {
 	const string BACKWARD = "BACKWARD";
 	const string LEFT = "LEFT";
 	const string RIGHT = "RIGHT";
+	const string STRAFE_LEFT = "STRAFE_LEFT";
+	const string STRAFE_RIGHT = "STRAFE_RIGHT";
 	const string HIT = "HIT";
 	const string PAUSE = "PAUSE";
 
@@ -37,12 +39,14 @@ public class PlayerPrefsManager : MonoBehaviour {
 		return PlayerPrefs.GetInt (HIGH_SCORE);
 	}
 
-	public static void SetKeybindings(string forward, string backward, string left, string right, string hit, string pause)
+	public static void SetKeybindings(string forward, string backward, string left, string right, string strafe_left, string strafe_right, string hit, string pause)
 	{
 		PlayerPrefs.SetString(FORWARD, forward);
 		PlayerPrefs.SetString(BACKWARD, backward);
 		PlayerPrefs.SetString(LEFT, left);
 		PlayerPrefs.SetString(RIGHT, right);
+		PlayerPrefs.SetString(STRAFE_LEFT, strafe_left);
+		PlayerPrefs.SetString(STRAFE_RIGHT, strafe_right);
 		PlayerPrefs.SetString(HIT, hit);
 		PlayerPrefs.SetString(PAUSE, pause);
 		PlayerPrefs.Save ();
@@ -79,7 +83,7 @@ public class PlayerPrefsManager : MonoBehaviour {
 			}
 			else
 			{
-				PlayerPrefs.SetString(LEFT, KeyCode.A.ToString());
+				PlayerPrefs.SetString(LEFT, KeyCode.Q.ToString());
 				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(LEFT));
 			}
 		case "rotateRight":
@@ -89,8 +93,28 @@ public class PlayerPrefsManager : MonoBehaviour {
 			}
 			else
 			{
-				PlayerPrefs.SetString(RIGHT, KeyCode.D.ToString());
+				PlayerPrefs.SetString(RIGHT, KeyCode.E.ToString());
 				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(RIGHT));
+			}
+		case "strafeLeft":
+			if (PlayerPrefs.HasKey (STRAFE_LEFT))
+			{
+				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(STRAFE_LEFT));
+			}
+			else
+			{
+				PlayerPrefs.SetString(STRAFE_LEFT, KeyCode.A.ToString());
+				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(STRAFE_LEFT));
+			}
+		case "strafeRight":
+			if (PlayerPrefs.HasKey (STRAFE_RIGHT))
+			{
+				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(STRAFE_RIGHT));
+			}
+			else
+			{
+				PlayerPrefs.SetString(STRAFE_RIGHT, KeyCode.D.ToString());
+				return (KeyCode)Enum.Parse (typeof(KeyCode), PlayerPrefs.GetString(STRAFE_RIGHT));
 			}
 		case "hit":
 			if (PlayerPrefs.HasKey (HIT))

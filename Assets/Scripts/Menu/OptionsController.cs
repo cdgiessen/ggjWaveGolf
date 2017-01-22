@@ -12,6 +12,8 @@ public class OptionsController : MonoBehaviour
 	public Text backwardField;
 	public Text leftField;
 	public Text rightField;
+	public Text strafeLeftField;
+	public Text strafeRightField;
 	public Text hitField;
 	public Text pauseField;
 	bool waitingForKey = false;
@@ -26,6 +28,8 @@ public class OptionsController : MonoBehaviour
 		backwardField.text = PlayerPrefsManager.GetKeybinding ("backward").ToString();
 		leftField.text = PlayerPrefsManager.GetKeybinding ("rotateLeft").ToString();
 		rightField.text = PlayerPrefsManager.GetKeybinding ("rotateRight").ToString();
+		strafeLeftField.text = PlayerPrefsManager.GetKeybinding ("strafeLeft").ToString();
+		strafeRightField.text = PlayerPrefsManager.GetKeybinding ("strafeRight").ToString();
 		hitField.text = PlayerPrefsManager.GetKeybinding ("hit").ToString();
 		pauseField.text = PlayerPrefsManager.GetKeybinding ("pause").ToString();
 	}
@@ -51,7 +55,7 @@ public class OptionsController : MonoBehaviour
 	public void SaveAndExit ()
 	{
 		PlayerPrefsManager.SetMasterVolume (volumeSlider.value);
-		PlayerPrefsManager.SetKeybindings (forwardField.text, backwardField.text, leftField.text, rightField.text, hitField.text, pauseField.text);
+		PlayerPrefsManager.SetKeybindings (forwardField.text, backwardField.text, leftField.text, rightField.text, strafeLeftField.text, strafeRightField.text, hitField.text, pauseField.text);
 		PlayerPrefs.Save ();
 	}
 
