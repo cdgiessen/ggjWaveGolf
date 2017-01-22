@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerPrefsManager : MonoBehaviour {
 
 	const string MASTER_VOLUME_KEY = "master_volume";
-	const string HIGH_SCORE = "High Score";
+	static int HIGH_SCORE = 0;
 	const string FORWARD = "FORWARD";
 	const string BACKWARD = "BACKWARD";
 	const string LEFT = "LEFT";
@@ -31,12 +31,11 @@ public class PlayerPrefsManager : MonoBehaviour {
 	}
 
 	public static void SetHighScore (int score) {
-		PlayerPrefs.SetInt (HIGH_SCORE, score);
-		PlayerPrefs.Save ();
+		HIGH_SCORE = score;
 	}
 
 	public static int GetHighScore () {
-		return PlayerPrefs.GetInt (HIGH_SCORE);
+		return HIGH_SCORE;
 	}
 
 	public static void SetKeybindings(string forward, string backward, string left, string right, string strafe_left, string strafe_right, string hit, string pause)
