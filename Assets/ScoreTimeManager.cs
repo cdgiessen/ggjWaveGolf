@@ -9,7 +9,7 @@ public class ScoreTimeManager : MonoBehaviour {
 	public Text countdownText;
 	public float startTime = 60f;
 	float timeLeft;
-	int score = 0;
+	public int score = 0;
 
 	// Use this for initialization
 	void Start () {
