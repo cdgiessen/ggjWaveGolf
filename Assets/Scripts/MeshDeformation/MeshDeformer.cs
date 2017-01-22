@@ -38,7 +38,7 @@ public class MeshDeformer : MonoBehaviour
         
         mesh = GetComponent<MeshFilter>().mesh;
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        UpdateMeshGeometry();
+        DeformMeshGeometry();       
     }
 
     // Update is called once per frame
@@ -60,12 +60,12 @@ public class MeshDeformer : MonoBehaviour
 
         if ((player.position - (transform.position + transform.parent.position)).magnitude < UpdateRange)
         {
-            UpdateMeshGeometry();
+            DeformMeshGeometry();
         }
         
     }
 
-    public void UpdateMeshGeometry()
+    public void DeformMeshGeometry()
     {
         Vector3[] vertsToDeform = mesh.vertices; 
         Vector3[] normalsToDeform = mesh.normals; 
