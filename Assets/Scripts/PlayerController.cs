@@ -6,11 +6,14 @@ public class PlayerController : MonoBehaviour {
 
     public float moveSpeed = 1f;
 	public float rotationSpeed = 1f;
+	public float strafeSpeed = 1f;
 	public Canvas pauseMenu;
 	KeyCode forward;
 	KeyCode backward;
 	KeyCode left;
 	KeyCode right;
+	KeyCode strafeLeft;
+	KeyCode strafeRight;
 	KeyCode hit;
 	KeyCode pause;
 	bool isPaused = false;
@@ -22,6 +25,8 @@ public class PlayerController : MonoBehaviour {
 		backward = PlayerPrefsManager.GetKeybinding ("backward");
 		left = PlayerPrefsManager.GetKeybinding ("rotateLeft");
 		right = PlayerPrefsManager.GetKeybinding ("rotateRight");
+		strafeLeft = PlayerPrefsManager.GetKeybinding ("strafeLeft");
+		strafeRight = PlayerPrefsManager.GetKeybinding ("strafeRight");
 		hit = PlayerPrefsManager.GetKeybinding ("hit");
 		pause = PlayerPrefsManager.GetKeybinding ("pause");
 	}
@@ -35,6 +40,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		float zinput = 0;
+		float xinput = 0;
 		float rotateInput = 0;
 
 		if (Input.GetKey (forward))
@@ -53,9 +59,18 @@ public class PlayerController : MonoBehaviour {
 		{
 			rotateInput = 1;
 		}
+		if (Input.GetKey (strafeLeft))
+		{
+			xinput = -1;
+		}
+		else if (Input.GetKey (strafeRight))
+		{
+			xinput = 1;
+		}
 		float zAxis = zinput * moveSpeed * Time.deltaTime;
+		float xAxis = xinput * strafeSpeed * Time.deltaTime;
 		float rotation = rotateInput * rotationSpeed * Time.deltaTime;
-		transform.Translate (0, 0, zAxis);
+		transform.Translate (xAxis, 0, zAxis);
 		transform.Rotate (0, rotation, 0);
     }
 
