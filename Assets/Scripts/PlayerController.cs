@@ -18,21 +18,22 @@ public class PlayerController : MonoBehaviour {
 	KeyCode pause;
 	bool isPaused = false;
 
-	// Use this for initialization
-	void Awake () {
-		gameObject.tag = "Player";
-		forward = PlayerPrefsManager.GetKeybinding ("forward");
-		backward = PlayerPrefsManager.GetKeybinding ("backward");
-		left = PlayerPrefsManager.GetKeybinding ("rotateLeft");
-		right = PlayerPrefsManager.GetKeybinding ("rotateRight");
-		strafeLeft = PlayerPrefsManager.GetKeybinding ("strafeLeft");
-		strafeRight = PlayerPrefsManager.GetKeybinding ("strafeRight");
-		hit = PlayerPrefsManager.GetKeybinding ("hit");
-		pause = PlayerPrefsManager.GetKeybinding ("pause");
-	}
+    // Use this for initialization
+    void Awake()
+    {
+        gameObject.tag = "Player";
+        forward = PlayerPrefsManager.GetKeybinding("forward");
+        backward = PlayerPrefsManager.GetKeybinding("backward");
+        left = PlayerPrefsManager.GetKeybinding("rotateLeft");
+        right = PlayerPrefsManager.GetKeybinding("rotateRight");
+        strafeLeft = PlayerPrefsManager.GetKeybinding("strafeLeft");
+        strafeRight = PlayerPrefsManager.GetKeybinding("strafeRight");
+        hit = PlayerPrefsManager.GetKeybinding("hit");
+        pause = PlayerPrefsManager.GetKeybinding("pause");
+    }
 
-	// Update is called once per frame
-	void Update () {
+
+	void FixedUpdate () {
 		if (Input.GetKeyDown(pause)) {
 			Time.timeScale = 0;
 			pauseMenu.gameObject.SetActive (true);
@@ -71,8 +72,8 @@ public class PlayerController : MonoBehaviour {
 		float xAxis = xinput * strafeSpeed * Time.deltaTime;
 		float rotation = rotateInput * rotationSpeed * Time.deltaTime;
 
-        //xAxis = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
-        //zAxis = Input.GetAxis("Vertical") * strafeSpeed * Time.deltaTime;
+        xAxis = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        zAxis = Input.GetAxis("Vertical") * strafeSpeed * Time.deltaTime;
 
         rotation = xAxis * rotationSpeed;
 		transform.Translate (xAxis, 0, zAxis);
