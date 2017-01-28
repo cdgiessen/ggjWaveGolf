@@ -10191,11 +10191,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4347248450404566, guid: 8b2ed0b46db54dd48a6d6348cf599cf5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.27
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4347248450404566, guid: 8b2ed0b46db54dd48a6d6348cf599cf5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.104
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4347248450404566, guid: 8b2ed0b46db54dd48a6d6348cf599cf5, type: 2}
       propertyPath: m_LocalPosition.z
@@ -10221,42 +10221,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 23476727095244592, guid: 8b2ed0b46db54dd48a6d6348cf599cf5,
+    - target: {fileID: 54639325169369570, guid: 8b2ed0b46db54dd48a6d6348cf599cf5,
         type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 8fcaa8ec24411ef4291fe60a91c42423, type: 2}
-    - target: {fileID: 23476727095244592, guid: 8b2ed0b46db54dd48a6d6348cf599cf5,
-        type: 2}
-      propertyPath: m_ReceiveShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 33768993023846726, guid: 8b2ed0b46db54dd48a6d6348cf599cf5,
-        type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300000, guid: e2e3efce2fd45294488398da97e83c52, type: 3}
-    - target: {fileID: 135905994734139542, guid: 8b2ed0b46db54dd48a6d6348cf599cf5,
-        type: 2}
-      propertyPath: m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4347248450404566, guid: 8b2ed0b46db54dd48a6d6348cf599cf5, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4347248450404566, guid: 8b2ed0b46db54dd48a6d6348cf599cf5, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4347248450404566, guid: 8b2ed0b46db54dd48a6d6348cf599cf5, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 135905994734139542, guid: 8b2ed0b46db54dd48a6d6348cf599cf5,
-        type: 2}
-      propertyPath: m_Radius
-      value: 1
+      propertyPath: m_CollisionDetection
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8b2ed0b46db54dd48a6d6348cf599cf5, type: 2}
